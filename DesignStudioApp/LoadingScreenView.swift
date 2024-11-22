@@ -8,6 +8,7 @@
 import SwiftUI
 
 
+@available(macOS 13.0, *)
 struct LoadingScreenView: View {
     @State private var isLoaded = false
     @State private var angle = Angle.degrees(0)
@@ -58,6 +59,7 @@ struct LoadingScreenView: View {
      }
 }
 
+@available(macOS 13.0, *)
 struct LoadingScreenView_Previews: PreviewProvider {
     static var previews: some View {
         LoadingScreenView()

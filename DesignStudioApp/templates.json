@@ -1,0 +1,259 @@
+{
+    "mainDesigns":[
+        {
+            "title":"Cut Files",
+            "bucketName":"cutfiles",
+            "trending":{
+                "mainUrl":"",
+                "templates":["",""]
+            },
+            "Categories":[
+                {
+                    "categoryTitle":"food",
+                    "categoryName":"food",
+                    "count":17
+                },
+                {
+                    "categoryTitle":"Beer",
+                    "categoryName":"Beer",
+                    "count":15
+                },
+                {
+                    "categoryTitle":"Fishing",
+                    "categoryName":"Fishing",
+                    "count":15
+                },
+                {
+                    "categoryTitle":"Gym",
+                    "categoryName":"Gym",
+                    "count":15
+                },
+                {
+                    "categoryTitle":"I",
+                    "categoryName":"I",
+                    "count":15
+                },
+                {
+                    "categoryTitle":"Love",
+                    "categoryName":"Love",
+                    "count":15
+                },
+
+                {
+                    "categoryTitle":"Thanks giving",
+                    "categoryName":"Thanksgiving",
+                    "count":15
+                },
+                
+                {
+                            "categoryTitle":"Halloween",
+                            "categoryName":"Halloween",
+                            "count":15
+                        },
+                
+                {
+                    "categoryTitle":"Wine",
+                    "categoryName":"Wine",
+                    "count":15
+                }
+            ]
+        },
+        {
+            "title":"Monograms",
+            "bucketName":"Monograms",
+            "trending":{
+                "mainUrl":"",
+                "templates":["",""]
+            },
+            "Categories":[
+                {
+                    "categoryTitle":"3D Font",
+                    "categoryName":"3DFont",
+                    "count":10
+                    
+                },
+                
+                {
+                    "categoryTitle":"Christmas",
+                    "categoryName":"Christmas",
+                    "count":36
+                },
+                
+                {
+                    "categoryTitle":"Butterfly",
+                    "categoryName":"Butterfly",
+                    "count":26
+                },
+                {
+                    "categoryTitle":"Cat",
+                    "categoryName":"Cat",
+                    "count":26
+                },
+                
+                {
+                    "categoryTitle":"Unicorn",
+                    "categoryName":"Unicorn",
+                    "count":16
+                    
+                },
+                {
+                    "categoryTitle":"Dance",
+                    "categoryName":"Dance",
+                    "count":10
+                },
+                {
+                    "categoryTitle":"Fish Lover",
+                    "categoryName":"FishLover",
+                    "count":11
+                },
+                {
+                    "categoryTitle":"For You",
+                    "categoryName":"ForYou",
+                    "count":11
+                },
+                {
+                    "categoryTitle":"Heart",
+                    "categoryName":"Heart",
+                    "count":26
+                },
+                {
+                    "categoryTitle":"Watercolor Number",
+                    "categoryName":"WatercolorNumber",
+                    "count":21
+                }
+            ]
+        },
+        {
+            "title":"Shapes",
+            "bucketName":"Shapes",
+            "trending":{
+                "mainUrl":"",
+                "templates":["",""]
+            },
+            "Categories":[
+                {
+                    "categoryTitle":"Abstract",
+                    "categoryName":"Abstract",
+                    "count":10
+                },
+                {
+                    "categoryTitle":"Baby",
+                    "categoryName": "Baby",
+                    "count":10
+                },
+                {
+                    "categoryTitle":"Doodles",
+                    "categoryName":"Doodles",
+                    "count":10
+                   
+                },
+                {
+                    "categoryTitle":"Arrows",
+                    "categoryName": "Arrows",
+                    "count":25
+                },
+                {
+                    "categoryTitle":"Food",
+                    "categoryName":"Food",
+                    "count":10
+                   
+                },
+                 {
+                    "categoryTitle":"Dragons",
+                    "categoryName": "Dragons",
+                    "count":9
+                },
+                {
+                    "categoryTitle":"Heartbeat",
+                    "categoryName": "Heartbeat",
+                    "count":6
+                },
+                {
+                    "categoryTitle":"Games",
+                    "categoryName":"Games",
+                    "count":10
+                   
+                }
+            ]
+        },
+        {
+            "title":"Watercolor",
+            "bucketName":"Watercolor",
+            "trending":{
+                "mainUrl":"",
+                "templates":["",""]
+            },
+            "Categories":[
+                {
+                    "categoryTitle":"Christmas",
+                    "categoryName":"Christmas",
+                    "count":10
+                  
+                },
+                {
+                    "categoryTitle":"Jar Flowers",
+                    "categoryName":"JarFlowers",
+                    "count":10
+                },
+                {
+                    "categoryTitle":"Love",
+                    "categoryName":"Love",
+                    "count":13
+                    
+                },
+                {
+                    "categoryTitle":"Mountain",
+                    "categoryName":"Mountain",
+                    "count":13
+                    
+                },
+                {
+                    "categoryTitle":"Sarcastic",
+                    "categoryName":"Sarcastic",
+                    "count":12
+                    
+                }
+            ]
+        },
+        {
+            "title":"Stickers",
+            "bucketName":"Stickers",
+            "trending":{
+                "mainUrl":"",
+                "templates":["",""]
+            },
+            "Categories":[
+                {
+                    "categoryTitle":"Animal",
+                    "categoryName":"Animal",
+                    "count":11
+                },
+                {
+                    "categoryTitle":"Christmas",
+                    "categoryName":"Christmas",
+                    "count":13
+                },
+                {
+                    "categoryTitle":"Fathers Day",
+                    "categoryName":"FathersDay",
+                    "count":16
+                },
+                {
+                    "categoryTitle":"Love",
+                    "categoryName":"Love",
+                    "count":21
+                },
+                {
+                    "categoryTitle":"Motivational",
+                    "categoryName":"Motivational",
+                    "count":12
+                },
+                {
+                    "categoryTitle":"Sale",
+                    "categoryName":"Sale",
+                    "count":11
+                }
+            ]
+        }
+    ]
+}

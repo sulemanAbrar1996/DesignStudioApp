@@ -8,6 +8,7 @@
 import SwiftUI
 import AppKit
 
+@available(macOS 13.0, *)
 class AppDelegate: NSObject, NSApplicationDelegate {
     var loadingWindow: NSWindow?
 
