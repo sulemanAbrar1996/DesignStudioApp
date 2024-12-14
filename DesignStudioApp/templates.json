@@ -10,27 +10,27 @@
             "Categories":[
                 {
                     "categoryTitle":"food",
-                    "categoryName":"food",
+                    "categoryName":"https://cutdesigns.s3.us-east-1.amazonaws.com/cutfiles/thumbnails/food/thumbnail0.png",
                     "count":17
                 },
                 {
                     "categoryTitle":"Beer",
-                    "categoryName":"Beer",
+                    "categoryName":"https://cutdesigns.s3.us-east-1.amazonaws.com/cutfiles/thumbnails/food/thumbnail1.png",
                     "count":15
                 },
                 {
                     "categoryTitle":"Fishing",
-                    "categoryName":"Fishing",
+                    "categoryName":"https://cutdesigns.s3.us-east-1.amazonaws.com/cutfiles/thumbnails/food/thumbnail2.png",
                     "count":15
                 },
                 {
                     "categoryTitle":"Gym",
-                    "categoryName":"Gym",
+                    "categoryName":"https://cutdesigns.s3.us-east-1.amazonaws.com/cutfiles/thumbnails/food/thumbnail3.png",
                     "count":15
                 },
                 {
                     "categoryTitle":"I",
-                    "categoryName":"I",
+                    "categoryName":"https://cutdesigns.s3.us-east-1.amazonaws.com/cutfiles/thumbnails/food/thumbnail4.png",
                     "count":15
                 },
                 {

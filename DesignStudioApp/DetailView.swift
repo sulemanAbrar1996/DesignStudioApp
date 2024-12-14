@@ -11,14 +11,19 @@ import SwiftUI
 struct DetailView: View {
     let categoryName: String // Name of the category
     let imageName: String    // Name of the image passed from HomeScreenView
+    var onBack: () -> Void
+
     @State private var showSavePopup = false
-    
+    @State private var selectedMockup: String = "T-Shirt" // Default mockup
+    @State private var loadedImage: NSImage? = nil
+    @State private var imageLoadError: String? = nil
+
     var body: some View {
         VStack(spacing: 16) {
             // Navigation Bar
             HStack {
                 Button(action: {
-                    // Handle back action (handled automatically by NavigationLink)
+                    onBack() // Handle back action
                 }) {
                     HStack {
                         Image(systemName: "chevron.backward")
@@ -31,12 +36,12 @@ struct DetailView: View {
                             .foregroundColor(.black)
                     }
                 }
+                .buttonStyle(.plain)
                 .padding(.leading)
                 Spacer()
-                Text("Customize or Save")
+                Text("Customise or Save")
                     .font(.title2)
-                    .foregroundColor(.green)
-                Spacer()
+                    .foregroundColor(.accentColor)
                 Spacer()
             }
             .padding()
@@ -51,7 +56,8 @@ struct DetailView: View {
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 0, style: .continuous)
-                                .fill(Color.green)
+                                .fill(Color.accentColor)
+                                .clipShape(RoundedRectangle(cornerRadius: 0, style: .continuous))
                         )
                         .frame(width: 120, height: 20, alignment: .center)
                         .mask(
@@ -59,17 +65,165 @@ struct DetailView: View {
                         )
                         .overlay(
                             RoundedCornersShape(topLeft: 10, topRight: 10, bottomLeft: 0, bottomRight: 0)
-                                .stroke(Color.green, lineWidth: 2)
+                                .stroke(Color.accentColor, lineWidth: 2)
                         )
-
-                    // Rectangle with green border containing the image
+                    
                     Rectangle()
-                        .stroke(Color.green, lineWidth: 2)
+                        .stroke(Color.accentColor, lineWidth: 2)
                         .overlay(
-                            Image(imageName) // Use the dynamic imageName passed from HomeScreenView
-                                .resizable()
-                                .scaledToFit()
-                                .padding()
+                            RoundedCornersShape(topLeft: 10, topRight: 10, bottomLeft: 0, bottomRight: 0)
+                                .stroke(Color.accentColor, lineWidth: 2)
+                        )
+                        .overlay(
+                            Group {
+                                if let loadedImage = loadedImage {
+                                    Image(nsImage: loadedImage) // Display the loaded image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding()
+                                } else if let _ = imageLoadError {
+//                                    Text(error)  // Display error message if image fails to load
+                                    Image(systemName: "photo") // Display the loaded image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .padding()
+                                        .foregroundColor(.accentColor)
+                                } else {
+                                    ProgressView()  // Show a loading indicator while the image loads
+                                }
+                            }
+                        )
+                        .background(Color.white)
+                        .cornerRadius(3)
+                }
+                .frame(width: 300, height: 500)
+
+
+                // MockUp View
+                VStack(spacing: 0.1) {
+                    Text("MockUp View")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.accentColor)
+                        .background(
+                            RoundedRectangle(cornerRadius: 0, style: .continuous)
+                                .fill(Color.accentColor)
+                                .clipShape(RoundedRectangle(cornerRadius: 0, style: .continuous))
+                        )
+                        .frame(width: 120, height: 20, alignment: .center)
+                        .mask(
+                            RoundedCornersShape(topLeft: 10, topRight: 10, bottomLeft: 0, bottomRight: 0)
+                        )
+                        .overlay(
+                            RoundedCornersShape(topLeft: 10, topRight: 10, bottomLeft: 0, bottomRight: 0)
+                                .stroke(Color.accentColor, lineWidth: 2)
+                        )
+                    
+                    Rectangle()
+                        .stroke(Color.accentColor, lineWidth: 2)
+                        .overlay(
+                            ZStack {
+                                if selectedMockup == "T-Shirt" {
+                                    GeometryReader { geometry in
+                                        Image("mockupshirt")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: geometry.size.width, height: geometry.size.height)
+                                            .overlay(
+                                                Group {
+                                                    if let loadedImage = loadedImage {
+                                                        Image(nsImage: loadedImage) // Display the loaded image
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.3) // Reduce the size to 30%
+                                                            .position(x: geometry.size.width / 2 - 20, y: geometry.size.height / 2 - 40) // Move the image left and up
+                                                            .padding()
+                                                    } else if let _ = imageLoadError {
+                                                        // Show a fallback image or error message
+                                                        Image(systemName: "photo")
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.3)
+                                                            .position(x: geometry.size.width / 2 - 20, y: geometry.size.height / 2 - 40) // Same position adjustments
+                                                            .padding()
+                                                            .foregroundColor(.accentColor)
+                                                    } else {
+                                                        ProgressView()  // Show a loading indicator while the image loads
+                                                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.3)
+                                                            .position(x: geometry.size.width / 2 - 20, y: geometry.size.height / 2 - 40) // Same position adjustments
+                                                    }
+                                                }
+                                            )
+                                    }
+                                }
+                                else if selectedMockup == "Cup" {
+                                    GeometryReader { geometry in
+                                        Image("mockupCup")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: geometry.size.width, height: geometry.size.height)
+                                            .overlay(
+                                                Group {
+                                                    if let loadedImage = loadedImage {
+                                                        Image(nsImage: loadedImage) // Display the loaded image
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.3) // Reduce the size to 30%
+                                                            .position(x: geometry.size.width / 2 - 20, y: geometry.size.height / 2 - 40) // Move the image left and up
+                                                            .padding()
+                                                    } else if let _ = imageLoadError {
+                                                        // Show a fallback image or error message
+                                                        Image(systemName: "photo")
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.3)
+                                                            .position(x: geometry.size.width / 2 - 20, y: geometry.size.height / 2 - 40) // Same position adjustments
+                                                            .padding()
+                                                            .foregroundColor(.accentColor)
+                                                    } else {
+                                                        ProgressView()  // Show a loading indicator while the image loads
+                                                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.3)
+                                                            .position(x: geometry.size.width / 2 - 20, y: geometry.size.height / 2 - 40) // Same position adjustments
+                                                    }
+                                                }
+                                            )
+                                    }
+                                }
+                                else if selectedMockup == "Cap" {
+                                    GeometryReader { geometry in
+                                        Image("mockupCap")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: geometry.size.width, height: geometry.size.height)
+                                            .overlay(
+                                                Group {
+                                                    if let loadedImage = loadedImage {
+                                                        Image(nsImage: loadedImage) // Display the loaded image
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.3) // Reduce the size to 30%
+                                                            .position(x: geometry.size.width / 2 - 20, y: geometry.size.height / 2 - 40) // Move the image left and up
+                                                            .padding()
+                                                    } else if let _ = imageLoadError {
+                                                        // Show a fallback image or error message
+                                                        Image(systemName: "photo")
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.3)
+                                                            .position(x: geometry.size.width / 2 - 20, y: geometry.size.height / 2 - 40) // Same position adjustments
+                                                            .padding()
+                                                            .foregroundColor(.accentColor)
+                                                    } else {
+                                                        ProgressView()  // Show a loading indicator while the image loads
+                                                            .frame(width: geometry.size.width * 0.3, height: geometry.size.height * 0.3)
+                                                            .position(x: geometry.size.width / 2 - 20, y: geometry.size.height / 2 - 40) // Same position adjustments
+                                                    }
+                                                }
+                                            )
+                                    }
+                                }
+                            }
                         )
                         .background(Color.white)
                         .cornerRadius(3)
@@ -80,68 +234,74 @@ struct DetailView: View {
                 VStack(spacing: 20) {
                     Text("Mockup Options:")
                         .font(.headline)
-                        .foregroundColor(.green)
+                        .foregroundColor(.accentColor)
 
                     VStack(spacing: 24) {
+                        // T-Shirt Button
                         Button(action: {
-                            // Handle T-Shirt selection
+                            selectedMockup = "T-Shirt" // Switch to T-Shirt mockup
                         }) {
                             VStack {
-                                Image(systemName: "tshirt")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(height: 50)
-                                    .foregroundColor(.green)
                                 Text("T-Shirt")
                                     .font(.body)
-                                    .foregroundColor(.green)
+                                    .foregroundColor(.accentColor)
+                                    .padding(.bottom, 20)
+                                Image("mockupshirt")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(height: 50)
                             }
                             .frame(width: 120, height: 120)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.green, lineWidth: 2)
+                                    .stroke(selectedMockup == "T-Shirt" ? Color.accentColor : Color.accentColor, lineWidth: 2)
                             )
                         }
+                        .buttonStyle(.plain)
 
+                        // Cup Button
                         Button(action: {
-                            // Handle Cup selection
+                            selectedMockup = "Cup" // Switch to Cup mockup
                         }) {
                             VStack {
-                                Image(systemName: "cup.and.saucer")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(height: 50)
-                                    .foregroundColor(.green)
                                 Text("Cup")
                                     .font(.body)
-                                    .foregroundColor(.green)
+                                    .foregroundColor(.accentColor)
+                                    .padding(.bottom, 10)
+                                Image("mockupCup")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(height: 50)
                             }
                             .frame(width: 120, height: 120)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.gray, lineWidth: 2)
+                                    .stroke(selectedMockup == "Cup" ? Color.accentColor : Color.accentColor, lineWidth: 2)
                             )
                         }
+                        .buttonStyle(.plain)
 
+                        // Cap Button
                         Button(action: {
-                            // Handle Cap selection
+                            selectedMockup = "Cap" // Switch to Cap mockup
                         }) {
                             VStack {
-                                Image(systemName: "capsule")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(height: 50)
-                                    .foregroundColor(.green)
                                 Text("Cap")
                                     .font(.body)
-                                    .foregroundColor(.green)
+                                    .foregroundColor(.accentColor)
+                                    .padding(.bottom, 10)
+                                Image("mockupCap")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(height: 50)
                             }
                             .frame(width: 120, height: 120)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.gray, lineWidth: 2)
+                                    .stroke(selectedMockup == "Cap" ? Color.accentColor : Color.accentColor, lineWidth: 2)
                             )
                         }
+                        .buttonStyle(.plain)
                     }
                 }
                 .frame(width: 150)
@@ -157,137 +317,216 @@ struct DetailView: View {
                     .foregroundColor(.white)
                     .padding()
                     .frame(width: 300, height: 50, alignment: .center)
-                    .background(Color.green)
+                    .background(Color.accentColor)
                     .cornerRadius(30)
             }
+            .buttonStyle(.plain)
             .padding()
         }
         .background(Color.white)
         .padding()
         .sheet(isPresented: $showSavePopup) {
-            SavePopupView()
+            SavePopupView(showSavePopup: $showSavePopup, loadedImage: $loadedImage)
         }
+        .onAppear {
+                 fetchImage(from: imageName) // Trigger image fetching when view appears
+             }
     }
+    
+    func fetchImage(from urlString: String) {
+        guard let url = URL(string: urlString) else {
+            imageLoadError = "Invalid URL"
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    imageLoadError = "Error fetching image: \(error.localizedDescription)"
+                    print("Error fetching image: \(error.localizedDescription)") // Debugging log
+                }
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                // Check if response status code is 200 (OK)
+                if httpResponse.statusCode != 200 {
+                    DispatchQueue.main.async {
+                        imageLoadError = "Failed to fetch image. Status code: \(httpResponse.statusCode)"
+                        print("Failed to fetch image. Status code: \(httpResponse.statusCode)") // Debugging log
+                    }
+                    return
+                }
+            }
+            
+            if let data = data, let nsImage = NSImage(data: data) {
+                DispatchQueue.main.async {
+                    loadedImage = nsImage
+                    imageLoadError = nil
+                }
+            } else {
+                DispatchQueue.main.async {
+                    imageLoadError = "Failed to load image data."
+                    print("Failed to load image data.") // Debugging log
+                }
+            }
+        }
+        
+        task.resume()
+    }
+
 }
 
-
-
-
-
-
+ 
 struct SavePopupView: View {
+        @Binding var showSavePopup: Bool // Control popup visibility
+        @Binding var loadedImage: NSImage? // Access the loaded image
+        @State private var showAlert: Bool = false // State for showing an alert
+        @State private var alertMessage: String = ""
+    
     var body: some View {
         ZStack {
-            // Background color to match the popup
-            Color.white
-            
-            VStack {
-                // Title and close button row
-                HStack {
-                    Image(systemName: "printer") // Replace with the appropriate icon
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 40, height: 40)
-                        .padding(.leading, 8)
-                    Spacer()
-                    Button(action: {
-                        // Close the modal
-                    }) {
-                        Image(systemName: "xmark")
-                            .foregroundColor(.black)
-                            .padding()
+            // Dim background
+//            Color.gray.opacity(0.5)
+//                .ignoresSafeArea()
+            // Main popup container
+            VStack(spacing: 0) {
+                HStack(spacing: 0) {
+                    // Left panel (image preview)
+                    ZStack {
+                        Color.white
+                        if let image = loadedImage {
+                            Image(nsImage: image)
+                                .resizable()
+                                .scaledToFit()
+                                .padding()
+                        } else {
+                            Text("No Image Loaded")
+                                .foregroundColor(.gray)
+                        }
                     }
-                }
-                .padding(.top)
-                .padding(.horizontal)
+                    .frame(width: 350, height: 400)
+                    
+                    // Right panel (options)
+                    ZStack {
+                        Color.accentColor
+                        VStack(spacing: 20) {
+                            // Header
+                            VStack(spacing: 8) {
+                                Image("designlogo") // Replace with custom illustration
+                                    .resizable()
+                                    .frame(width: 200, height: 100)
+                                    .foregroundColor(.white)
+                            }
 
-                // Title text
-                Text("Design Studio")
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundColor(Color.green)
-                    .padding(.bottom, 20)
+                            // Buttons
+                            VStack(spacing: 16) {
+                                // Reusable Button
+                                CustomButton(title: "SVG File", backgroundColor: Color.buttonGreen, textColor: .white) {
+                                    if let image = loadedImage {
+                                        saveSVG(from: image)
+                                    }
+                                }
 
-                // Buttons for download options
-                VStack(spacing: 16) {
-                    Button(action: {
-                        // Handle SVG File download
-                    }) {
-                        Text("SVG File")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.green)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
-                    }
+                                CustomButton(title: "High Resolution PNG", backgroundColor: .white, textColor: .black, isPro: true) {
+                                    showProFeatureAlert(message: "Upgrade to Pro for High-Resolution PNG.")
+                                }
 
-                    Button(action: {
-                        // Handle High Resolution PNG download (Pro feature)
-                    }) {
-                        HStack {
-                            Text("High Resolution PNG")
-                                .font(.headline)
-                            Spacer()
-                            Text("PRO")
-                                .font(.caption)
-                                .foregroundColor(.red)
-                                .bold()
+                                CustomButton(title: "PDF File", backgroundColor: .white, textColor: .black, isPro: true) {
+                                    showProFeatureAlert(message: "Upgrade to Pro for PDF File.")
+                                }
+
+                                CustomButton(title: "Cancel", backgroundColor: .white, textColor: .black) {
+                                    showSavePopup = false
+                                }
+                            }
                         }
                         .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.gray.opacity(0.3))
-                        .cornerRadius(10)
                     }
-
-                    Button(action: {
-                        // Handle PDF File download (Pro feature)
-                    }) {
-                        HStack {
-                            Text("PDF File")
-                                .font(.headline)
-                            Spacer()
-                            Text("PRO")
-                                .font(.caption)
-                                .foregroundColor(.red)
-                                .bold()
-                        }
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.gray.opacity(0.3))
-                        .cornerRadius(10)
-                    }
-
-                    Button(action: {
-                        // Close the modal
-                    }) {
-                        Text("Cancel")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.red.opacity(0.3))
-                            .foregroundColor(.black)
-                            .cornerRadius(10)
-                    }
+                    .frame(width: 350, height: 400)
                 }
-                .padding(.horizontal)
             }
-            .padding()
+            .background(Color.clear)
+            .cornerRadius(20)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.blue, lineWidth: 2)
+            )
         }
-        .frame(width: 400, height: 600) // Adjust the frame size as needed
-        .cornerRadius(0)
-        .shadow(radius: 0)
+        .frame(width: 700, height: 400)
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Pro Feature"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
+    }
+    
+    private func saveSVG(from image: NSImage) {
+            let savePanel = NSSavePanel()
+            savePanel.allowedFileTypes = ["svg"]
+            savePanel.nameFieldStringValue = "Image.svg"
+
+            savePanel.begin { result in
+                if result == .OK, let url = savePanel.url {
+                    let svgData = convertImageToSVG(image: image) // Call the function here
+                    do {
+                        try svgData.write(to: url) // Write the SVG data to the URL
+                        print("SVG saved successfully at \(url.path)")
+                    } catch {
+                        print("Failed to save SVG: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
+    private func convertImageToSVG(image: NSImage) -> Data {
+        // Get the bitmap representation of the image
+        guard let bitmapRep = image.representations.first as? NSBitmapImageRep else {
+            print("Failed to get bitmap representation of the image.")
+            return Data()
+        }
+
+        let width = bitmapRep.pixelsWide
+        let height = bitmapRep.pixelsHigh
+
+        // Start building the SVG content
+        var svgContent = """
+        <svg width="\(width)" height="\(height)" xmlns="http://www.w3.org/2000/svg">
+        """
+
+        // Loop through each pixel and create a <rect> for it
+        for y in 0..<height {
+            for x in 0..<width {
+                if let color = bitmapRep.colorAt(x: x, y: y) {
+                    let red = Int(color.redComponent * 255)
+                    let green = Int(color.greenComponent * 255)
+                    let blue = Int(color.blueComponent * 255)
+                    let alpha = color.alphaComponent // Optional transparency handling
+
+                    // Only add colored pixels (ignore fully transparent ones)
+                    if alpha > 0 {
+                        svgContent += """
+                        <rect x="\(x)" y="\(y)" width="1" height="1" fill="rgb(\(red),\(green),\(blue))" />
+                        """
+                    }
+                }
+            }
+        }
+
+        // Close the SVG
+        svgContent += "</svg>"
+
+        // Convert to Data
+        return svgContent.data(using: .utf8) ?? Data()
+    }
+
+
+    private func showProFeatureAlert(message: String) {
+        alertMessage = message
+        showAlert = true
     }
 }
-
-
-
-
-
-
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(categoryName: "", imageName: "")
+        DetailView(categoryName: "", imageName: "", onBack: {})
     }
 }
 

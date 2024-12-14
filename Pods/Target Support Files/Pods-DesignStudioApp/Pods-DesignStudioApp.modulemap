@@ -1,0 +1,6 @@
+framework module Pods_DesignStudioApp {
+  umbrella header "Pods-DesignStudioApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

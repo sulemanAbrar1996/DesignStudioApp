@@ -8,93 +8,86 @@
 import SwiftUI
 
 
-@available(macOS 13.0, *)
+@available(macOS 12.0, *)
 struct LoadingScreenView: View {
     @State private var isLoaded = false
-    @State private var angle = Angle.degrees(0)
     @State private var progress: Double = 0.0
+
     var body: some View {
-         ZStack {
-             if !isLoaded {
-                 VStack {
-                     Image("designlogo") // Replace with your logo image name
-                         .resizable()
-                         .aspectRatio(contentMode: .fit)
-                         .frame(width: 150, height: 150) // Adjust the size as needed
-                         .padding()
+        ZStack {
+            if !isLoaded {
+                VStack(spacing: 20) {
+                    Image("designlogo") // Replace with your actual logo image name
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 200, height: 200) // Adjusted size
+                        .padding(.bottom, 10)
 
-                     DottedCircle()
-                         .frame(width: 50, height: 50)
-                         .foregroundColor(.white)
 
-                     Text("Loading...")
-                         .font(.headline)
-                         .foregroundColor(.white)
-                     ProgressBar(progress: progress)
-                         .frame(maxWidth: .infinity, maxHeight: 10)
-                         .foregroundColor(.white)
-                         .background(Color.gray.opacity(0.3))
-                         .cornerRadius(20)
-                         
-                 }
-                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                 .background(Color.accentColor)
-                 .onAppear {
-                     withAnimation(.linear(duration: 3).repeatForever(autoreverses: false)) {
-                         angle = .degrees(360)
-                         progress = 1.0
-                     }
-                     
-                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                         withAnimation {
-                             isLoaded = true
-                         }
-                     }
-                 }
-             } else {
-                 // Your home screen view
-                 HomeScreenView()
-             }
-         }
-     }
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .scaleEffect(1)
+
+                    Text("LOADING...")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.white)
+
+                    ProgressBar(progress: progress)
+                        .frame(maxWidth: 600, maxHeight: 15)
+                        
+                        .padding(.horizontal, 40)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.accent) // Background matches your image's green
+                .ignoresSafeArea()
+                .onAppear {
+                    // Simulate progress loading
+                    withAnimation(.linear(duration: 3)) {
+                        progress = 1.0
+                    }
+
+                    // Transition to HomeScreenView after the loading completes
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        withAnimation {
+                            isLoaded = true
+                        }
+                    }
+                }
+            } else {
+                // Transition to your home screen view
+                HomeScreenView()
+            }
+        }
+    }
 }
 
-@available(macOS 13.0, *)
+@available(macOS 12.0, *)
 struct LoadingScreenView_Previews: PreviewProvider {
     static var previews: some View {
         LoadingScreenView()
     }
 }
 
-struct DottedCircle: Shape {
-    func path(in rect: CGRect) -> Path {
-        let center = CGPoint(x: rect.midX, y: rect.midY)
-        let radius = min(rect.width, rect.height) / 3
-        
-        var path = Path()
+// MARK: - Custom ProgressBar
 
-        
-        let dashLength = 3.0
-        let dashOffset = 20.0
-        
-        path.addArc(center: center, radius: radius, startAngle: .degrees(0), endAngle: .degrees(360), clockwise: false)
-        
-        return path.strokedPath(StrokeStyle(lineWidth:
- 2, lineCap: .round, lineJoin: .round, dash: [dashLength], dashPhase: dashOffset))
-    }
-}
-struct ProgressBar: Shape {
+struct ProgressBar: View {
     var progress: Double
-    
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let width = rect.width
-        let height = rect.height
-        
-        let progressWidth = width * progress
-        
-        path.addRect(CGRect(x: 0, y: 0, width: progressWidth, height: height))
-        
-        return path
+
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.buttonGreen) // Background track
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.white) // Progress bar fill
+                    .frame(width: geometry.size.width * CGFloat(progress))
+                    .overlay(
+                     RoundedRectangle(cornerRadius: 8)
+                        .stroke(.buttonGreen, lineWidth: 1)
+                    )
+            }
+        }
     }
 }
+
+

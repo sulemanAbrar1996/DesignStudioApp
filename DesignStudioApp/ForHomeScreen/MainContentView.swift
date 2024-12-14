@@ -2,6 +2,14 @@
 //  MainContentView.swift
 //  DesignStudioApp
 //
+//  Created by Suleman Abrar on 14/12/2024.
+//
+
+
+//
+//  MainContentView.swift
+//  DesignStudioApp
+//
 //  Created by Suleman Abrar on 21/11/2024.
 //
 
@@ -68,19 +76,21 @@ import SwiftUI
 //    }
 //}
 
+@available(macOS 12.0, *)
 struct MainContentView: View {
     @ObservedObject var viewModel: HomeViewModel
     @Binding var selectedCategory: String?
     @Binding var selectedImage: String?
     @Binding var navigateToDetail: Bool
-
+    @Binding var showProPopup: Bool
+    
     var body: some View {
         VStack(spacing: 0) {
             // App Title and Category Section at the top
             VStack {
                 AppName(title: "Design Studio", subtitle: "Get PREMIUM DESIGNS every week")
                     .frame(maxWidth: .infinity) // Make the title span the full width of the screen
-                    .padding(.top, 20) // Adjust padding if needed
+                    .padding(.top, 40) // Adjust padding if needed
 
                 CategoryScrollView(
                     viewModel: viewModel,
@@ -88,16 +98,22 @@ struct MainContentView: View {
                 )
             }
             .background(Color.accentColor3)
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color.black, lineWidth: 1)
+            )
             .cornerRadius(15)
-            .padding(.top, -65)
-            .ignoresSafeArea()
+            .padding(.top, -30)
+            .padding(.trailing, -10)
+//            .ignoresSafeArea()
             
             // Main content section
             GridContentView(
                 viewModel: viewModel,
                 selectedCategory: $selectedCategory,
                 selectedImage: $selectedImage,
-                navigateToDetail: $navigateToDetail
+                navigateToDetail: $navigateToDetail,
+                showProPopup: $showProPopup
             )
         }
         .background(Color.gray.opacity(0.05)) // Light background for the main content area

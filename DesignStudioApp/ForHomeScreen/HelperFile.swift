@@ -31,7 +31,6 @@ struct RoundedTopRectangle: Shape {
         return path
     }
 }
-
 // Menu Option Component
 struct MenuOption: View {
  var title: String
@@ -53,7 +52,7 @@ struct MenuOption: View {
          .cornerRadius(30)
          .overlay(
              RoundedRectangle(cornerRadius: 30)
-                 .stroke(Color.black, lineWidth: 1.5)
+                 .stroke(Color.black, lineWidth: 1)
          )
          .padding(.vertical, 5)
          .padding(.horizontal)
@@ -80,6 +79,10 @@ struct DesignItemView: View {
 }
 
 
+let s3BaseURL = "https://cutdesigns.s3.us-east-1.amazonaws.com/"
+let s3Type    = "/svg/"
+let s3Design  = "/design"
+let s3ImageType2 = ".svg"
 // Menu Options
 let menuOptions = [
     ("SVG Cut Files", "scissors"),
@@ -120,3 +123,55 @@ struct CategoryItem: View {
     }
 }
 
+extension View {
+    func Print(_ vars: Any...) -> some View {
+        for v in vars { print(v) }
+        return EmptyView()
+    }
+}
+
+
+struct CustomButton: View {
+    var title: String
+    var backgroundColor: Color
+    var textColor: Color
+    var isPro: Bool = false
+    var action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack {
+                Text(title)
+                    .foregroundColor(textColor)
+                if isPro {
+                    Spacer()
+                    Text("PRO")
+                        .font(.caption)
+                        .foregroundColor(.red)
+                }
+            }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(backgroundColor)
+            .cornerRadius(8)
+        }
+        .buttonStyle(.plain)
+    }
+}
+// MARK: - Helper Extension for Color
+
+extension Color {
+    init(hex: String) {
+        let scanner = Scanner(string: hex)
+        scanner.currentIndex = hex.startIndex
+
+        var rgb: UInt64 = 0
+        scanner.scanHexInt64(&rgb)
+
+        let r = Double((rgb >> 16) & 0xFF) / 255.0
+        let g = Double((rgb >> 8) & 0xFF) / 255.0
+        let b = Double(rgb & 0xFF) / 255.0
+
+        self.init(red: r, green: g, blue: b)
+    }
+}

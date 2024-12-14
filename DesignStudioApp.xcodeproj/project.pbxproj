@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3A3BE8A5032CE22F5FE32CB5 /* Pods_DesignStudioApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0069F04D6AC5E71A155F8F07 /* Pods_DesignStudioApp.framework */; };
+		3F969BB2028CB669965C0389 /* Pods_DesignStudioAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAF7EFE7F9EC8E2CCFEC28E3 /* Pods_DesignStudioAppTests.framework */; };
+		68B3D778472D378488EEA942 /* Pods_DesignStudioApp_DesignStudioAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B640BFACBC20BE93A9060745 /* Pods_DesignStudioApp_DesignStudioAppUITests.framework */; };
+		96A15CA12D0B55DA00E7916A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A15CA02D0B55DA00E7916A /* StoreKit.framework */; };
+		96BE60652D037C5200E3F5EF /* SotoS3 in Frameworks */ = {isa = PBXBuildFile; productRef = 96BE60642D037C5200E3F5EF /* SotoS3 */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		96DE95AF2CE9FBBC000659A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,14 +32,37 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0069F04D6AC5E71A155F8F07 /* Pods_DesignStudioApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesignStudioApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2597C3229994995D3C3140C1 /* Pods-DesignStudioApp-DesignStudioAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesignStudioApp-DesignStudioAppUITests.release.xcconfig"; path = "Target Support Files/Pods-DesignStudioApp-DesignStudioAppUITests/Pods-DesignStudioApp-DesignStudioAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		7D7CD266AED640BDE76225EE /* Pods-DesignStudioAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesignStudioAppTests.debug.xcconfig"; path = "Target Support Files/Pods-DesignStudioAppTests/Pods-DesignStudioAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		834D147621581E263FB598D4 /* Pods-DesignStudioApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesignStudioApp.release.xcconfig"; path = "Target Support Files/Pods-DesignStudioApp/Pods-DesignStudioApp.release.xcconfig"; sourceTree = "<group>"; };
+		96A15CA02D0B55DA00E7916A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		96DE959D2CE9FBB9000659A9 /* DesignStudioApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DesignStudioApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96DE95AE2CE9FBBC000659A9 /* DesignStudioAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DesignStudioAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96DE95B82CE9FBBC000659A9 /* DesignStudioAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DesignStudioAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B640BFACBC20BE93A9060745 /* Pods_DesignStudioApp_DesignStudioAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesignStudioApp_DesignStudioAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBE4F2866E8E65C2709419A7 /* Pods-DesignStudioApp-DesignStudioAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesignStudioApp-DesignStudioAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-DesignStudioApp-DesignStudioAppUITests/Pods-DesignStudioApp-DesignStudioAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DC6675780CFDF3AEAEB30573 /* Pods-DesignStudioApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesignStudioApp.debug.xcconfig"; path = "Target Support Files/Pods-DesignStudioApp/Pods-DesignStudioApp.debug.xcconfig"; sourceTree = "<group>"; };
+		EAF7EFE7F9EC8E2CCFEC28E3 /* Pods_DesignStudioAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DesignStudioAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDF1D9B148F504A4DD81461D /* Pods-DesignStudioAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DesignStudioAppTests.release.xcconfig"; path = "Target Support Files/Pods-DesignStudioAppTests/Pods-DesignStudioAppTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		96BE602C2D01EFC200E3F5EF /* Exceptions for "DesignStudioApp" folder in "DesignStudioApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 96DE959C2CE9FBB9000659A9 /* DesignStudioApp */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		96DE959F2CE9FBB9000659A9 /* DesignStudioApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				96BE602C2D01EFC200E3F5EF /* Exceptions for "DesignStudioApp" folder in "DesignStudioApp" target */,
+			);
 			path = DesignStudioApp;
 			sourceTree = "<group>";
 		};
@@ -52,6 +83,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96A15CA12D0B55DA00E7916A /* StoreKit.framework in Frameworks */,
+				3A3BE8A5032CE22F5FE32CB5 /* Pods_DesignStudioApp.framework in Frameworks */,
+				96BE60652D037C5200E3F5EF /* SotoS3 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F969BB2028CB669965C0389 /* Pods_DesignStudioAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,12 +101,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68B3D778472D378488EEA942 /* Pods_DesignStudioApp_DesignStudioAppUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		687AE8A905C79B077A1B8621 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				96A15CA02D0B55DA00E7916A /* StoreKit.framework */,
+				0069F04D6AC5E71A155F8F07 /* Pods_DesignStudioApp.framework */,
+				B640BFACBC20BE93A9060745 /* Pods_DesignStudioApp_DesignStudioAppUITests.framework */,
+				EAF7EFE7F9EC8E2CCFEC28E3 /* Pods_DesignStudioAppTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		96DE95942CE9FBB9000659A9 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +126,8 @@
 				96DE95B12CE9FBBC000659A9 /* DesignStudioAppTests */,
 				96DE95BB2CE9FBBC000659A9 /* DesignStudioAppUITests */,
 				96DE959E2CE9FBB9000659A9 /* Products */,
+				FBF60832E4FB7805E615A210 /* Pods */,
+				687AE8A905C79B077A1B8621 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +141,19 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		FBF60832E4FB7805E615A210 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DC6675780CFDF3AEAEB30573 /* Pods-DesignStudioApp.debug.xcconfig */,
+				834D147621581E263FB598D4 /* Pods-DesignStudioApp.release.xcconfig */,
+				BBE4F2866E8E65C2709419A7 /* Pods-DesignStudioApp-DesignStudioAppUITests.debug.xcconfig */,
+				2597C3229994995D3C3140C1 /* Pods-DesignStudioApp-DesignStudioAppUITests.release.xcconfig */,
+				7D7CD266AED640BDE76225EE /* Pods-DesignStudioAppTests.debug.xcconfig */,
+				EDF1D9B148F504A4DD81461D /* Pods-DesignStudioAppTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -99,9 +161,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96DE95C22CE9FBBC000659A9 /* Build configuration list for PBXNativeTarget "DesignStudioApp" */;
 			buildPhases = (
+				938CDDD55DB7DDF23EA0F073 /* [CP] Check Pods Manifest.lock */,
 				96DE95992CE9FBB9000659A9 /* Sources */,
 				96DE959A2CE9FBB9000659A9 /* Frameworks */,
 				96DE959B2CE9FBB9000659A9 /* Resources */,
+				38C85CFB52FC29AEA2DEFD56 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -111,8 +175,6 @@
 				96DE959F2CE9FBB9000659A9 /* DesignStudioApp */,
 			);
 			name = DesignStudioApp;
-			packageProductDependencies = (
-			);
 			productName = DesignStudioApp;
 			productReference = 96DE959D2CE9FBB9000659A9 /* DesignStudioApp.app */;
 			productType = "com.apple.product-type.application";
@@ -121,6 +183,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96DE95C52CE9FBBC000659A9 /* Build configuration list for PBXNativeTarget "DesignStudioAppTests" */;
 			buildPhases = (
+				410459ABD31AF4293563A576 /* [CP] Check Pods Manifest.lock */,
 				96DE95AA2CE9FBBC000659A9 /* Sources */,
 				96DE95AB2CE9FBBC000659A9 /* Frameworks */,
 				96DE95AC2CE9FBBC000659A9 /* Resources */,
@@ -134,8 +197,6 @@
 				96DE95B12CE9FBBC000659A9 /* DesignStudioAppTests */,
 			);
 			name = DesignStudioAppTests;
-			packageProductDependencies = (
-			);
 			productName = DesignStudioAppTests;
 			productReference = 96DE95AE2CE9FBBC000659A9 /* DesignStudioAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -144,9 +205,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96DE95C82CE9FBBC000659A9 /* Build configuration list for PBXNativeTarget "DesignStudioAppUITests" */;
 			buildPhases = (
+				30ABA4DA460E25B4543FB90A /* [CP] Check Pods Manifest.lock */,
 				96DE95B42CE9FBBC000659A9 /* Sources */,
 				96DE95B52CE9FBBC000659A9 /* Frameworks */,
 				96DE95B62CE9FBBC000659A9 /* Resources */,
+				AF7328D3A71A3B77D3F84D21 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -157,8 +220,6 @@
 				96DE95BB2CE9FBBC000659A9 /* DesignStudioAppUITests */,
 			);
 			name = DesignStudioAppUITests;
-			packageProductDependencies = (
-			);
 			productName = DesignStudioAppUITests;
 			productReference = 96DE95B82CE9FBBC000659A9 /* DesignStudioAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -195,6 +256,9 @@
 			);
 			mainGroup = 96DE95942CE9FBB9000659A9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				96BE602E2D034E9F00E3F5EF /* XCRemoteSwiftPackageReference "aws-sdk-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 96DE959E2CE9FBB9000659A9 /* Products */;
 			projectDirPath = "";
@@ -230,6 +294,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		30ABA4DA460E25B4543FB90A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DesignStudioApp-DesignStudioAppUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		38C85CFB52FC29AEA2DEFD56 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DesignStudioApp/Pods-DesignStudioApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DesignStudioApp/Pods-DesignStudioApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DesignStudioApp/Pods-DesignStudioApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		410459ABD31AF4293563A576 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DesignStudioAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		938CDDD55DB7DDF23EA0F073 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DesignStudioApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF7328D3A71A3B77D3F84D21 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DesignStudioApp-DesignStudioAppUITests/Pods-DesignStudioApp-DesignStudioAppUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DesignStudioApp-DesignStudioAppUITests/Pods-DesignStudioApp-DesignStudioAppUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DesignStudioApp-DesignStudioAppUITests/Pods-DesignStudioApp-DesignStudioAppUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		96DE95992CE9FBB9000659A9 /* Sources */ = {
@@ -389,6 +556,7 @@
 		};
 		96DE95C32CE9FBBC000659A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC6675780CFDF3AEAEB30573 /* Pods-DesignStudioApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -400,7 +568,9 @@
 				DEVELOPMENT_TEAM = 4B7R3VBW5K;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DesignStudioApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Design Studio";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -419,6 +589,7 @@
 		};
 		96DE95C42CE9FBBC000659A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 834D147621581E263FB598D4 /* Pods-DesignStudioApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -430,7 +601,9 @@
 				DEVELOPMENT_TEAM = 4B7R3VBW5K;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DesignStudioApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Design Studio";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -449,6 +622,7 @@
 		};
 		96DE95C62CE9FBBC000659A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D7CD266AED640BDE76225EE /* Pods-DesignStudioAppTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -467,6 +641,7 @@
 		};
 		96DE95C72CE9FBBC000659A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDF1D9B148F504A4DD81461D /* Pods-DesignStudioAppTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -485,6 +660,7 @@
 		};
 		96DE95C92CE9FBBC000659A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BBE4F2866E8E65C2709419A7 /* Pods-DesignStudioApp-DesignStudioAppUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -501,6 +677,7 @@
 		};
 		96DE95CA2CE9FBBC000659A9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2597C3229994995D3C3140C1 /* Pods-DesignStudioApp-DesignStudioAppUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -555,6 +732,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		96BE602E2D034E9F00E3F5EF /* XCRemoteSwiftPackageReference "aws-sdk-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swift-aws/aws-sdk-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		96BE60642D037C5200E3F5EF /* SotoS3 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 96BE602E2D034E9F00E3F5EF /* XCRemoteSwiftPackageReference "aws-sdk-swift" */;
+			productName = SotoS3;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 96DE95952CE9FBB9000659A9 /* Project object */;
 }

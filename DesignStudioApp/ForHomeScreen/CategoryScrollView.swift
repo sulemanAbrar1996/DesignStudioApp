@@ -14,7 +14,7 @@ struct CategoryScrollView: View {
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 15){
+            HStack(){
                 HStack(spacing: 0) {
                     ForEach(viewModel.mainDesigns, id: \.id) { category in
                         Text(category.title)
@@ -24,35 +24,18 @@ struct CategoryScrollView: View {
                             .foregroundColor(.white)
                             .clipShape(RoundedTopRectangle(cornerRadius: 10))
                             .overlay(
-                             RoundedTopRectangle(cornerRadius: 12)
-                                 .stroke(.black, lineWidth: 2)
+                             RoundedTopRectangle(cornerRadius: 10)
+                                .stroke(.buttonGreen, lineWidth: 1)
                             )
                             .onTapGesture {
                                 selectedCategory = category.title
                             }
                     }
                 }
-//                           .padding()
             }
             .padding(.top, 20)
             .background(Color.accentColor3)
-//            {
-//                ForEach(viewModel.mainDesigns, id: \.id) { design in
-//                    Text(design.title)
-//                        .padding(.horizontal, 20)
-//                        .padding(.vertical, 10)
-//                        .background(Color.accentColor)
-//                        .cornerRadius(8)
-//                        .onTapGesture {
-//                            selectedCategory = design.title
-//                        }
-//                }
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 12)
-//                        .stroke(Color.black, lineWidth: 1.2)
-//                )
-//            }
-            .padding(.horizontal, 20)
+//            .padding(.horizontal, 20)
         }
         
         .padding(.top, 20)

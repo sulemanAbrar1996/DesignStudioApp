@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-@available(macOS 13.0, *)
+ 
+@available(macOS 12.0, *)
 @main
 struct DesignStudioAppApp: App {
     var body: some Scene {
