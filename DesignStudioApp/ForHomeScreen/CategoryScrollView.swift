@@ -17,6 +17,7 @@ struct CategoryScrollView: View {
             HStack(){
                 HStack(spacing: 0) {
                     ForEach(viewModel.mainDesigns, id: \.id) { category in
+                        
                         Text(category.title)
                             .padding(.vertical, 10)
                             .padding(.horizontal, 20)

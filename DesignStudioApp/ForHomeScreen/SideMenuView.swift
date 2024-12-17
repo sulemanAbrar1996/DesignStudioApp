@@ -20,10 +20,7 @@ struct SideMenuView: View {
             // Logo or Title section
             LogoView(selectedCategory: $selectedCategory)
             // Menu Options
-            MenuOptionsView(menuOptions: menuOptions, additionalOptions: additionalOptions, showProPopup: $showProPopup)
-//            Spacer()
-            // Upgrade to Pro button
-//            UpgradeToProButton(showProPopup: $showProPopup)
+            MenuOptionsView(menuOptions: menuOptions, additionalOptions: additionalOptions, showProPopup: $showProPopup, selectedCategory: $selectedCategory)
         }
         .frame(width: 320)
         .background(Color.accentColor2)
@@ -38,18 +35,19 @@ struct MenuOptionsView: View {
     let menuOptions: [(String, String)]
     let additionalOptions: [(String, String)]
     @Binding var showProPopup: Bool
+    @Binding var selectedCategory: String?
 //    @State private var showProPopup: Bool = false
     var body: some View {
         VStack(alignment: .center) {
             // Primary Menu Options
             ForEach(menuOptions, id: \.0) { title, icon in
-                MenuOption(title: title, icon: icon)
+                MenuOption(title: title, icon: icon, selectedCategory: $selectedCategory)
             }
             Divider()
                 .background(Color.accentColor)
             // Additional Menu Options
             ForEach(additionalOptions, id: \.0) { title, icon in
-                MenuOption(title: title, icon: icon)
+                MenuOption(title: title, icon: icon, selectedCategory: $selectedCategory)
             }
             Spacer()
             UpgradeToProButton(showProPopup: $showProPopup)

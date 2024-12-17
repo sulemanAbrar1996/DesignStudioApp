@@ -8,15 +8,17 @@
 import Foundation
 import SwiftUI
 
+@available(macOS 12.0, *)
 struct DetailView: View {
     let categoryName: String // Name of the category
     let imageName: String    // Name of the image passed from HomeScreenView
     var onBack: () -> Void
 
     @State private var showSavePopup = false
-    @State private var selectedMockup: String = "T-Shirt" // Default mockup
+    @State private var selectedMockup: String = "T-Shirt"
     @State private var loadedImage: NSImage? = nil
     @State private var imageLoadError: String? = nil
+    @State private var showUpgradePopup = false  // State to control popup visibility
 
     var body: some View {
         VStack(spacing: 16) {
@@ -322,15 +324,34 @@ struct DetailView: View {
             }
             .buttonStyle(.plain)
             .padding()
+//            // SavePopupView
+//                       if showSavePopup {
+//                           SavePopupView(showSavePopup: $showSavePopup, loadedImage: $loadedImage, showUpgradePopup: $showUpgradePopup)
+//                               .zIndex(1)
+//                               .transition(.opacity)
+//                       }
+//
+//                       // ProUpgradePopup
+//                       if showUpgradePopup {
+//                           ProUpgradePopup(isPresented: $showUpgradePopup, mockupImage: "proImages")
+//                               .zIndex(2)
+//                               .transition(.opacity)
+//                       }
         }
         .background(Color.white)
         .padding()
+//        .animation(.easeInOut, value: showSavePopup || showUpgradePopup)
         .sheet(isPresented: $showSavePopup) {
-            SavePopupView(showSavePopup: $showSavePopup, loadedImage: $loadedImage)
+            SavePopupView(showSavePopup: $showSavePopup, loadedImage: $loadedImage, showUpgradePopup: $showUpgradePopup)
+        }
+        .sheet(isPresented: $showUpgradePopup) {
+            ProUpgradePopup(isPresented: $showUpgradePopup, mockupImage: "proImages")
         }
         .onAppear {
                  fetchImage(from: imageName) // Trigger image fetching when view appears
              }
+
+
     }
     
     func fetchImage(from urlString: String) {
@@ -378,11 +399,14 @@ struct DetailView: View {
 }
 
  
+@available(macOS 12.0, *)
 struct SavePopupView: View {
         @Binding var showSavePopup: Bool // Control popup visibility
         @Binding var loadedImage: NSImage? // Access the loaded image
         @State private var showAlert: Bool = false // State for showing an alert
         @State private var alertMessage: String = ""
+        @Binding var showUpgradePopup: Bool // New state for Upgrade popup
+        @State private var isPremiumUser: Bool = false
     
     var body: some View {
         ZStack {
@@ -429,11 +453,27 @@ struct SavePopupView: View {
                                 }
 
                                 CustomButton(title: "High Resolution PNG", backgroundColor: .white, textColor: .black, isPro: true) {
-                                    showProFeatureAlert(message: "Upgrade to Pro for High-Resolution PNG.")
+//                                    showProFeatureAlert(message: "Upgrade to Pro for High-Resolution PNG.")
+                                    if isPremiumUser {
+                                        // Handle high-resolution file action
+                                        
+                                    }
+                                    else {
+                                        showSavePopup = false // Hide SavePopupView
+                                        showUpgradePopup = true // Show ProUpgradePopup
+                                    }
                                 }
 
                                 CustomButton(title: "PDF File", backgroundColor: .white, textColor: .black, isPro: true) {
-                                    showProFeatureAlert(message: "Upgrade to Pro for PDF File.")
+//                                    showProFeatureAlert(message: "Upgrade to Pro for PDF File.")
+                                    if isPremiumUser {
+                                        // Handle high-resolution file action
+                                        
+                                    }
+                                    else {
+                                        showSavePopup = false // Hide SavePopupView
+                                        showUpgradePopup = true // Show ProUpgradePopup
+                                    }
                                 }
 
                                 CustomButton(title: "Cancel", backgroundColor: .white, textColor: .black) {
@@ -454,30 +494,27 @@ struct SavePopupView: View {
             )
         }
         .frame(width: 700, height: 400)
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("Pro Feature"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-        }
     }
-    
     private func saveSVG(from image: NSImage) {
-            let savePanel = NSSavePanel()
-            savePanel.allowedFileTypes = ["svg"]
-            savePanel.nameFieldStringValue = "Image.svg"
+        let savePanel = NSSavePanel()
+        savePanel.allowedFileTypes = ["svg"]
+        
+        let baseName = "Image"
+        savePanel.nameFieldStringValue = "\(baseName).svg"
 
-            savePanel.begin { result in
-                if result == .OK, let url = savePanel.url {
-                    let svgData = convertImageToSVG(image: image) // Call the function here
-                    do {
-                        try svgData.write(to: url) // Write the SVG data to the URL
-                        print("SVG saved successfully at \(url.path)")
-                    } catch {
-                        print("Failed to save SVG: \(error.localizedDescription)")
-                    }
+        savePanel.begin { result in
+            if result == .OK, let url = savePanel.url {
+                let svgData = convertImageToVectorSVG(image: image) // Generate vector-based SVG
+                do {
+                    try svgData.write(to: url) // Save the SVG data to the file
+                    print("SVG saved successfully at \(url.path)")
+                } catch {
+                    print("Failed to save SVG: \(error.localizedDescription)")
                 }
             }
         }
-    private func convertImageToSVG(image: NSImage) -> Data {
-        // Get the bitmap representation of the image
+    }
+    private func convertImageToVectorSVG(image: NSImage) -> Data {
         guard let bitmapRep = image.representations.first as? NSBitmapImageRep else {
             print("Failed to get bitmap representation of the image.")
             return Data()
@@ -488,34 +525,80 @@ struct SavePopupView: View {
 
         // Start building the SVG content
         var svgContent = """
-        <svg width="\(width)" height="\(height)" xmlns="http://www.w3.org/2000/svg">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 \(width) \(height)">
         """
 
-        // Loop through each pixel and create a <rect> for it
-        for y in 0..<height {
-            for x in 0..<width {
-                if let color = bitmapRep.colorAt(x: x, y: y) {
-                    let red = Int(color.redComponent * 255)
-                    let green = Int(color.greenComponent * 255)
-                    let blue = Int(color.blueComponent * 255)
-                    let alpha = color.alphaComponent // Optional transparency handling
-
-                    // Only add colored pixels (ignore fully transparent ones)
-                    if alpha > 0 {
-                        svgContent += """
-                        <rect x="\(x)" y="\(y)" width="1" height="1" fill="rgb(\(red),\(green),\(blue))" />
-                        """
-                    }
-                }
-            }
+        // Draw image as a vector using <image> tag and base64 encoding
+        if let imageData = bitmapRep.representation(using: .png, properties: [:]) {
+            let base64Image = imageData.base64EncodedString()
+            svgContent += """
+            <image x="0" y="0" width="\(width)" height="\(height)" xlink:href="data:image/png;base64,\(base64Image)" />
+            """
         }
 
         // Close the SVG
         svgContent += "</svg>"
 
-        // Convert to Data
         return svgContent.data(using: .utf8) ?? Data()
     }
+
+//    private func saveSVG(from image: NSImage) {
+//            let savePanel = NSSavePanel()
+//            savePanel.allowedFileTypes = ["svg"]
+//            savePanel.nameFieldStringValue = "Image.svg"
+//
+//            savePanel.begin { result in
+//                if result == .OK, let url = savePanel.url {
+//                    let svgData = convertImageToSVG(image: image) // Call the function here
+//                    do {
+//                        try svgData.write(to: url) // Write the SVG data to the URL
+//                        print("SVG saved successfully at \(url.path)")
+//                    } catch {
+//                        print("Failed to save SVG: \(error.localizedDescription)")
+//                    }
+//                }
+//            }
+//        }
+//    private func convertImageToSVG(image: NSImage) -> Data {
+//        // Get the bitmap representation of the image
+//        guard let bitmapRep = image.representations.first as? NSBitmapImageRep else {
+//            print("Failed to get bitmap representation of the image.")
+//            return Data()
+//        }
+//
+//        let width = bitmapRep.pixelsWide
+//        let height = bitmapRep.pixelsHigh
+//
+//        // Start building the SVG content
+//        var svgContent = """
+//        <svg width="\(width)" height="\(height)" xmlns="http://www.w3.org/2000/svg">
+//        """
+//
+//        // Loop through each pixel and create a <rect> for it
+//        for y in 0..<height {
+//            for x in 0..<width {
+//                if let color = bitmapRep.colorAt(x: x, y: y) {
+//                    let red = Int(color.redComponent * 255)
+//                    let green = Int(color.greenComponent * 255)
+//                    let blue = Int(color.blueComponent * 255)
+//                    let alpha = color.alphaComponent // Optional transparency handling
+//
+//                    // Only add colored pixels (ignore fully transparent ones)
+//                    if alpha > 0 {
+//                        svgContent += """
+//                        <rect x="\(x)" y="\(y)" width="1" height="1" fill="rgb(\(red),\(green),\(blue))" />
+//                        """
+//                    }
+//                }
+//            }
+//        }
+//
+//        // Close the SVG
+//        svgContent += "</svg>"
+//
+//        // Convert to Data
+//        return svgContent.data(using: .utf8) ?? Data()
+//    }
 
 
     private func showProFeatureAlert(message: String) {
@@ -524,6 +607,7 @@ struct SavePopupView: View {
     }
 }
 
+@available(macOS 12.0, *)
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView(categoryName: "", imageName: "", onBack: {})

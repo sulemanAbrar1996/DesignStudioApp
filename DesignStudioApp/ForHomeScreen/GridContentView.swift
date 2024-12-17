@@ -22,26 +22,28 @@ struct GridContentView: View {
                 let filteredDesigns = viewModel.mainDesigns.filter { design in
                     selectedCategory == nil || selectedCategory == design.title
                 }
-                                if selectedCategory == nil {
-                ForEach(filteredDesigns, id: \.id) { design in
-                    DesignSection(
-                        title: design.title,
-                        categories: design.categories,
-                        
-                        onCategorySelected: { category in
-                            selectedCategory = design.title
-                            selectedImage = category.categoryName
-                            navigateToDetail = true
-                        }, onSeeAllTapped: {
-                            selectedCategory = design.title // Show only the selected section
-                        }, showProPopup: $showProPopup
-                    )
+                if selectedCategory == nil {
+                    Print("FILTERED DESIGNS: \(filteredDesigns)")
+                    ForEach(filteredDesigns, id: \.id) { design in
+                        DesignSection(
+                            title: design.title,
+                            bucketName: design.bucketName,
+                            categories: design.categories,
+                            onCategorySelected: { category in
+                                selectedCategory = design.title
+                                selectedImage = category.categoryName
+                                navigateToDetail = true
+                            }, onSeeAllTapped: {
+                                selectedCategory = design.title // Show only the selected section
+                            }, showProPopup: $showProPopup
+                        )
+                    }
                 }
-            }
                 if selectedCategory != nil {
                     ForEach(filteredDesigns, id: \.id) { design in
                         DesignSection2(
                             title: design.title,
+                            bucketName: design.bucketName,
                             categories: design.categories,
                             onCategorySelected: { category in
                                 selectedCategory = design.title

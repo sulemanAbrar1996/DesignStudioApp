@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 
+let baseURLImage = "https://cutdesigns.s3.us-east-1.amazonaws.com/"
+    
 
 
 struct RoundedTopRectangle: Shape {
@@ -33,31 +35,41 @@ struct RoundedTopRectangle: Shape {
 }
 // Menu Option Component
 struct MenuOption: View {
- var title: String
- var icon: String
+    var title: String
+    var icon: String
+    @Binding var selectedCategory: String?
 
- var body: some View {
-     VStack(alignment: .leading) {
-         HStack {
-             Image(systemName: icon)
-                 .foregroundColor(.white)
-             Text(title)
-                 .font(.headline)
-                 .padding(.leading, 5)
-                 .foregroundColor(.white)
-         }
-         .padding()
-         .frame(width: 180, height: 50) // Set fixed width and height
-         .background(Color.accentColor)
-         .cornerRadius(30)
-         .overlay(
-             RoundedRectangle(cornerRadius: 30)
-                 .stroke(Color.black, lineWidth: 1)
-         )
-         .padding(.vertical, 5)
-         .padding(.horizontal)
-     }
- }
+    var body: some View {
+        VStack(alignment: .leading) {
+            Button(action: {
+                let cleanedTitle = title.contains("SVG")
+                                   ? title.replacingOccurrences(of: "SVG", with: "").trimmingCharacters(in: .whitespaces)
+                                   : title
+                               selectedCategory = cleanedTitle // Update the selected category
+            }) {
+                HStack {
+                    Image(systemName: icon)
+                        .foregroundColor(.white)
+                    Text(title)
+                        .font(.headline)
+                        .padding(.leading, 5)
+                        .foregroundColor(.white)
+                }
+                .padding()
+                
+                .frame(width: 180, height: 50)
+                .background(selectedCategory == title ? Color.buttonGreen : Color.accentColor)
+                .cornerRadius(30)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(Color.black, lineWidth: 1)
+                )
+                .padding(.vertical, 5)
+                .padding(.horizontal)
+            }
+            .buttonStyle(.plain)
+        }
+    }
 }
 
 // Design Item Component
@@ -83,6 +95,7 @@ let s3BaseURL = "https://cutdesigns.s3.us-east-1.amazonaws.com/"
 let s3Type    = "/svg/"
 let s3Design  = "/design"
 let s3ImageType2 = ".svg"
+
 // Menu Options
 let menuOptions = [
     ("SVG Cut Files", "scissors"),
